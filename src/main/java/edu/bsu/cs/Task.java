@@ -1,29 +1,43 @@
 package edu.bsu.cs;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class Task {
-    private String title;
-    private String note;
-    private String courseName;
     private String timestamp;
+    private String title;
+    private String content;
 
-    public Task(String title, String note, String courseName) {
+    public Task(String timestamp, String title, String content) {
+        this.timestamp = timestamp;
         this.title = title;
-        this.note = note;
-        this.courseName = courseName;
-        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.content = content;
     }
 
-    public String getTitle() { return title; }
-    public String getNote() { return note; }
-    public String getCourseName() { return courseName; }
-    public String getTimestamp() { return timestamp; }
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getTimestamp() {
+        return this.timestamp;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getContent() {
+        return this.content;
+    }
 
     @Override
     public String toString() {
-        return String.format("[%s] Course: %s | Task: %s | Note: %s",
-                timestamp, courseName, title, note);
+        return String.format("%s %s %s\n",
+                timestamp, title, content);
     }
 }
