@@ -1,4 +1,4 @@
-package edu.bsu.cs;
+package com.wiseplanner.service;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

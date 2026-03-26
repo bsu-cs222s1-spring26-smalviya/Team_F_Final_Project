@@ -1,4 +1,4 @@
-package edu.bsu.cs;
+package com.wiseplanner.service;
 
 public class Course {
     private String id;

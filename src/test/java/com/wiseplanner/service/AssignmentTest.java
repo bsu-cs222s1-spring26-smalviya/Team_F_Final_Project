@@ -1,4 +1,4 @@
-package edu.bsu.cs;
+package com.wiseplanner.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
