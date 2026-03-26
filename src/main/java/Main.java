@@ -1,4 +1,4 @@
-package com.wiseplanner.service;
+import com.wiseplanner.console.ConsoleUI;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

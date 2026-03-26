@@ -5,9 +5,9 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 public class WisePlannerKernel {
-    User user;
-    CanvasService canvasService;
-    TaskManager taskManager;
+    public User user;
+    public CanvasService canvasService;
+    public TaskManager taskManager;
 
     public WisePlannerKernel(String name, String canvasToken) {
         user = new User(name, canvasToken);

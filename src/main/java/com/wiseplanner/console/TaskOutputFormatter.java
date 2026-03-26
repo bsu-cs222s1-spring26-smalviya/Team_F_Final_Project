@@ -1,4 +1,6 @@
-package com.wiseplanner.service;
+package com.wiseplanner.console;
+
+import com.wiseplanner.service.Task;
 
 import java.util.List;
 
