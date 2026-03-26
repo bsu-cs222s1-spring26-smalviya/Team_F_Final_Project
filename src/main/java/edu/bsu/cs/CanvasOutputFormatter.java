@@ -18,7 +18,7 @@ public class CanvasOutputFormatter {
         output.append("Assignments\n");
         output.append("ID\tName\tDue Date\tDescription\n");
         for (Assignment a : assignments) {
-            output.append(a.getId() + "\t" + a.getName() + "\t" + a.getDueAt() + "\t" + a.getDescription() + "\n");
+            output.append(a.getId() + "\t" + a.getName() + "\t" + a.getDue_at() + "\t" + a.getDescription() + "\n");
         }
         return output.toString();
     }
