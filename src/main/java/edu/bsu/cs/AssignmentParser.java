@@ -1,23 +1,20 @@
 package edu.bsu.cs;
 
-import com.jayway.jsonpath.JsonPath;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class AssignmentParser {
     private List<Assignment> assignments = new ArrayList<>();
 
     public AssignmentParser(String jsonData) {
-        List<Map<String, Object>> rawAssignments = JsonPath.read(jsonData, "$");
-        for (Map<String, Object> item : rawAssignments) {
-            String id = String.valueOf(item.get("id"));
-            String name = String.valueOf(item.get("name"));
-            String description = String.valueOf(item.get("description"));
-            String dueAt = String.valueOf(item.get("due_at"));
-            assignments.add(new Assignment(id, name, description, dueAt));
-        }
+        Type listType = new TypeToken<List<Assignment>>() {
+        }.getType();
+        Gson gson = new Gson();
+        assignments = gson.fromJson(jsonData, listType);
     }
 
     public List<Assignment> getAssignments() {

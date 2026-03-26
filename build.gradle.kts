@@ -14,7 +14,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation(group = "org.slf4j", name = "slf4j-nop", version = "2.0.9")
-    implementation(group = "com.jayway.jsonpath", name = "json-path", version = "2.8.0")
+    implementation("com.google.code.gson:gson:2.13.2")
 }
 
 tasks.test {

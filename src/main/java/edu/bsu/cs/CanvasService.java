@@ -28,9 +28,9 @@ public class CanvasService {
 
         // Sort by due date (nulls last)
         assignments.sort((a, b) -> {
-            if (a.getDueAt().equals("null")) return 1;
-            if (b.getDueAt().equals("null")) return -1;
-            return a.getDueAt().compareTo(b.getDueAt());
+            if (a.getDue_at().equals("null")) return 1;
+            if (b.getDue_at().equals("null")) return -1;
+            return a.getDue_at().compareTo(b.getDue_at());
         });
 
         return assignments;
