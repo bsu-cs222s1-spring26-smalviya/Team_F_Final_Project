@@ -28,6 +28,6 @@ public class AssignmentTest {
 
     @Test
     public void getDueAt() {
-        Assertions.assertEquals("2026-04-01T23:59:00Z", assignment.getDueAt());
+        Assertions.assertEquals("2026-04-01T23:59:00Z", assignment.getDue_at());
     }
 }

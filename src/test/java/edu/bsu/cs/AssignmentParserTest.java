@@ -36,7 +36,7 @@ public class AssignmentParserTest {
 
     @Test
     public void parseDueAt() {
-        Assertions.assertEquals("2026-04-01T23:59:00Z", assignmentParser.getAssignments().get(0).getDueAt());
-        Assertions.assertEquals("2026-04-05T23:59:00Z", assignmentParser.getAssignments().get(1).getDueAt());
+        Assertions.assertEquals("2026-04-01T23:59:00Z", assignmentParser.getAssignments().get(0).getDue_at());
+        Assertions.assertEquals("2026-04-05T23:59:00Z", assignmentParser.getAssignments().get(1).getDue_at());
     }
 }
