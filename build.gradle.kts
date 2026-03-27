@@ -1,8 +1,10 @@
 plugins {
     id("java")
+    id("application")
+    id("org.openjfx.javafxplugin") version "0.1.0"
 }
 
-group = "org.example"
+group = "com.wiseplanner"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -19,4 +21,17 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+javafx {
+    version = "25.0.1"
+    modules("javafx.controls", "javafx.fxml")
+}
+
+application {
+    mainClass.set("Main")
+}
+
+tasks.withType<JavaExec> {
+    standardInput = System.`in`
 }
