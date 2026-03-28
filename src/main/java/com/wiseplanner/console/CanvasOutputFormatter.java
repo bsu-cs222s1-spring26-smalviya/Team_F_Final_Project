@@ -11,10 +11,10 @@ public class CanvasOutputFormatter {
         System.out.println("**********************************************************************");
         System.out.println("*                               Courses                              *");
         System.out.println("**********************************************************************");
-        System.out.println("ID                  |  Course Name");
+        System.out.println("Index    ID                  |  Course Name");
         System.out.println("----------------------------------------------------------------------");
-        for (Course i : courses) {
-            output.append(i.getId() + "\t" + "|  " + i.getName() + "\n");
+        for (int i = 0; i < courses.size(); i++) {
+            output.append(i + 1 + "\t" + courses.get(i).getId() + "\t" + "|  " + courses.get(i).getName() + "\n");
         }
         return output.toString();
     }

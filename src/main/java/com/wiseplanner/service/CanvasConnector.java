@@ -1,6 +1,7 @@
 package com.wiseplanner.service;
 
 import com.wiseplanner.exception.NetworkException;
+import com.wiseplanner.model.Course;
 import com.wiseplanner.model.User;
 
 import java.io.IOException;
@@ -32,10 +33,10 @@ public class CanvasConnector {
 
     }
 
-    public String fetchAssignments(String courseId) throws NetworkException {
+    public String fetchAssignments(Course course) throws NetworkException {
         try {
             String encodedUrlString = "https://canvas.instructure.com/api/v1/courses/" +
-                    courseId + "/assignments?access_token=" +
+                    course.getId() + "/assignments?access_token=" +
                     URLEncoder.encode(user.getCanvasToken(), Charset.defaultCharset());
             URI uri = new URI(encodedUrlString);
             URLConnection connection = uri.toURL().openConnection();
