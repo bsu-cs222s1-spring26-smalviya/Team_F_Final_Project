@@ -6,6 +6,7 @@ public class Course {
     private String id;
     private String name;
     private List<Assignment> assignments;
+    private List<Announcement> announcements;
 
     public Course(String id, String name) {
         this.id = id;
@@ -34,5 +35,13 @@ public class Course {
 
     public List<Assignment> getAssignments() {
         return assignments;
+    }
+
+    public void setAnnouncements(List<Announcement> announcements) {
+        this.announcements = announcements;
+    }
+
+    public List<Announcement> getAnnouncements() {
+        return announcements;
     }
 }

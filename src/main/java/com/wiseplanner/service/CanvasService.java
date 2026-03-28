@@ -3,6 +3,7 @@ package com.wiseplanner.service;
 import com.wiseplanner.exception.NetworkException;
 import com.wiseplanner.model.Course;
 import com.wiseplanner.model.User;
+import com.wiseplanner.util.AnnouncementParser;
 import com.wiseplanner.util.AssignmentParser;
 import com.wiseplanner.util.CanvasConnector;
 import com.wiseplanner.util.CourseParser;
@@ -21,6 +22,7 @@ public class CanvasService {
         updateCourses();
         for (Course i : courses) {
             updateAssignments(i);
+            updateAnnouncements(i);
         }
     }
 
@@ -45,5 +47,11 @@ public class CanvasService {
 //        });
 
         course.setAssignments(parser.getAssignments());
+    }
+
+    public void updateAnnouncements(Course course) throws NetworkException {
+        String jsonData = new CanvasConnector(user).fetchAnnouncements(course);
+        AnnouncementParser announcementParser = new AnnouncementParser(jsonData);
+        course.setAnnouncements(announcementParser.getAnnouncements());
     }
 }

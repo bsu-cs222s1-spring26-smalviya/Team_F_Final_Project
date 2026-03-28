@@ -62,7 +62,8 @@ public class ConsoleUI {
                     }
                     System.out.println("Please enter the index of the course you want to view");
                     int courseIndex = Integer.parseInt(scanner.nextLine());
-                    System.out.println("(1) View Assignment");
+                    System.out.println("(1) View Assignments");
+                    System.out.println("(2) View Announcements");
                     System.out.println("(0) Back");
                     System.out.println("Please enter your choice");
                     int choice_course = Integer.parseInt(scanner.nextLine());
@@ -70,7 +71,7 @@ public class ConsoleUI {
                         // Back
                         case 0:
                             break;
-                        // View Assignment
+                        // View Assignments
                         case 1:
                             try {
                                 wisePlannerKernel.canvas().updateAssignments(wisePlannerKernel.canvas().getCourses().get(courseIndex - 1));
@@ -79,6 +80,15 @@ public class ConsoleUI {
                                 System.err.println("[Error] " + e.getMessage());
                             }
                             break;
+                        // View Announcements
+                        case 2:
+                            try {
+                                wisePlannerKernel.canvas().updateAnnouncements(wisePlannerKernel.canvas().getCourses().get(courseIndex - 1));
+                                System.out.println(canvasOutputFormatter.getAnnouncementsOutput(wisePlannerKernel.canvas().getCourses().get(courseIndex - 1).getAnnouncements()));
+                            } catch (NetworkException e) {
+                                System.err.println("[Error] " + e.getMessage());
+                            }
+
                     }
                     break;
                 //Tasks

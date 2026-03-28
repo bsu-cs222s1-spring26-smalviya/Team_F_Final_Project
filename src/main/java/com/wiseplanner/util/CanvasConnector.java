@@ -47,4 +47,19 @@ public class CanvasConnector {
             throw new NetworkException("Network connection failed, unable to retrieve assignments information.");
         }
     }
+
+    public String fetchAnnouncements(Course course) throws NetworkException {
+        try {
+            String encodedUrlString = "https://canvas.instructure.com/api/v1/announcements?context_codes[]=course_" +
+                    course.getId();
+            URI uri = new URI(encodedUrlString);
+            URLConnection connection = uri.toURL().openConnection();
+            connection.setRequestProperty("Authorization", "Bearer " + user.getCanvasToken());
+            connection.setRequestProperty("User-Agent", "Final Project " + user.getName());
+            connection.connect();
+            return new String(connection.getInputStream().readAllBytes(), Charset.defaultCharset());
+        } catch (URISyntaxException | IOException e) {
+            throw new NetworkException("Network connection failed, unable to retrieve announcements information.");
+        }
+    }
 }
