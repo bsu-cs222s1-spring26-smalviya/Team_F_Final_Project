@@ -9,8 +9,6 @@ import java.util.List;
 
 public class CanvasService {
     private User user;
-    private List<Course> courses;
-    private List<Assignment> assignments;
 
     public CanvasService(User user) {
         this.user = user;
@@ -18,14 +16,12 @@ public class CanvasService {
 
     public List<Course> getCourses() throws NetworkException {
         CourseParser courseParser = new CourseParser(new CanvasConnector(user).fetchCourses());
-        courses = courseParser.getCourses();
-        return this.courses;
+        return courseParser.getCourses();
     }
 
-    public List<Assignment> getAssignments(String courseId) throws NetworkException {
-        String jsonData = new CanvasConnector(user).fetchAssignments(courseId);
+    public List<Assignment> getAssignments(Course course) throws NetworkException {
+        String jsonData = new CanvasConnector(user).fetchAssignments(course);
         AssignmentParser parser = new AssignmentParser(jsonData);
-        assignments = parser.getAssignments();
 
         // Sort by due date (nulls last) BUG: Crash when no due date.
 //        assignments.sort((a, b) -> {
@@ -34,6 +30,6 @@ public class CanvasService {
 //            return a.getDue_at().compareTo(b.getDue_at());
 //        });
 
-        return this.assignments;
+        return parser.getAssignments();
     }
 }

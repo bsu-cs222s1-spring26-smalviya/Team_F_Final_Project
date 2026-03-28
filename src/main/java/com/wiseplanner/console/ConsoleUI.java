@@ -4,12 +4,10 @@ import com.wiseplanner.exception.FileCorruptionException;
 import com.wiseplanner.exception.FileReadException;
 import com.wiseplanner.exception.FileWriteException;
 import com.wiseplanner.exception.NetworkException;
-import com.wiseplanner.model.Assignment;
 import com.wiseplanner.service.UserManager;
 import com.wiseplanner.service.WisePlannerKernel;
 
 import java.io.*;
-import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleUI {
@@ -47,31 +45,42 @@ public class ConsoleUI {
             System.out.println("*                             Main Menu                              *");
             System.out.println("**********************************************************************");
             System.out.println("(1) Courses");
-            System.out.println("(2) Task");
-            System.out.println("(3) Assignments");
+            System.out.println("(2) Tasks");
             System.out.println("(0) Exit");
             System.out.println("Please enter your choice");
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
+                // Exit
                 case 0:
                     return;
+                // Courses
                 case 1:
                     try {
                         System.out.print(canvasOutputFormatter.getCoursesOutput(wisePlannerKernel.canvasService.getCourses()));
                     } catch (NetworkException e) {
                         System.err.println("[Error] " + e.getMessage());
                     }
-                    System.out.println("Enter a Course ID to view its assignments, or 0 to go back:");
-                    String courseId = scanner.nextLine();
-                    if (!courseId.equals("0")) {
-                        try {
-                            List<Assignment> assignments = wisePlannerKernel.canvasService.getAssignments(courseId);
-                            System.out.print(canvasOutputFormatter.getAssignmentsOutput(assignments));
-                        } catch (NetworkException e) {
-                            System.err.println("[Error] " + e.getMessage());
-                        }
+                    System.out.println("Please enter the index of the course you want to view");
+                    int courseIndex = Integer.parseInt(scanner.nextLine());
+                    System.out.println("(1) View Assignment");
+                    System.out.println("(0) Back");
+                    System.out.println("Please enter your choice");
+                    int choice_course = Integer.parseInt(scanner.nextLine());
+                    switch (choice_course) {
+                        // Back
+                        case 0:
+                            break;
+                        // View Assignment
+                        case 1:
+                            try {
+                                System.out.print(canvasOutputFormatter.getAssignmentsOutput(wisePlannerKernel.canvasService.getAssignments(wisePlannerKernel.canvasService.getCourses().get(courseIndex - 1))));
+                            } catch (NetworkException e) {
+                                System.err.println("[Error] " + e.getMessage());
+                            }
+                            break;
                     }
                     break;
+                //Tasks
                 case 2:
                     System.out.println("(1) View Tasks");
                     System.out.println("(2) Add Task");
@@ -80,11 +89,14 @@ public class ConsoleUI {
                     System.out.println("Please enter your choice");
                     int choice_task = Integer.parseInt(scanner.nextLine());
                     switch (choice_task) {
+                        // Back
                         case 0:
                             break;
+                        // View Tasks
                         case 1:
                             System.out.println(taskOutputFormatter.getTaskOutput(wisePlannerKernel.taskManager.getTaskList()));
                             break;
+                        // Add Task
                         case 2:
                             System.out.println("Please enter task start time");
                             String timestamp = scanner.nextLine();
@@ -94,6 +106,7 @@ public class ConsoleUI {
                             String content = scanner.nextLine();
                             wisePlannerKernel.taskManager.addTask(timestamp, title, content);
                             break;
+                        // Delete Task
                         case 3:
                             System.out.println("Please enter the index");
                             int index = Integer.parseInt(scanner.nextLine());
@@ -105,18 +118,6 @@ public class ConsoleUI {
                             break;
                     }
                     break;
-                case 3:
-                    System.out.println("Enter a Course ID to view its assignments:");
-                    String directCourseId = scanner.nextLine();
-                    try {
-                        List<Assignment> assignments = wisePlannerKernel.canvasService.getAssignments(directCourseId);
-                        System.out.print(canvasOutputFormatter.getAssignmentsOutput(assignments));
-                    } catch (NetworkException e) {
-                        System.err.println("[Error] " + e.getMessage());
-                    }
-                    break;
-                default:
-                    continue;
             }
         }
     }
